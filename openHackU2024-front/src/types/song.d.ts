@@ -1,34 +1,49 @@
-export type account_aline = {
+export type AccountAlinePostRequest = {
     spotify_data: string;
     display_name: string;
     user_id: string;
 };
+
+export type AccountAlinePostResponse = {
+    states: string;
+};
   
-export type room_access_post = {
+export type RoomAccessPostRequest = {
     pass: string;
     display_name: string;
     user_id: string;
 };
   
-export type room_access_response = {
-    display_names: display_names[];
+export type RoomAccessPostResponse = {
+    states: string;
+    display_names: DisplayNames[];
+};
+
+export type RoomJoinPostRequest = {
+    pass: string;
+    display_name: string;
+    user_id: string;
+};
+
+export type RoomJoinPostResponse = {
+    states: string;
 };
   
-export type room_get_post = {
+export type RoomGetPostRequest = {
     pass: string;
 };
 
-export type room_get_response = {
+export type RoomGetPostResponse = {
     display_names: display_names[];
     song_data: song_data[];
 };
 
-export type display_names = {
+type DisplayNames = {
     display_name: string;
     user_id: string;
 };
 
-export type song_data = {
+type SongData = {
     song_title : string;
     song_artist : string;
     overlap : number;
