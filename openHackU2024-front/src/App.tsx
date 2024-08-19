@@ -25,6 +25,7 @@ function App() {
     }
 
     console.log('I HAVE A TOKEN', accessToken);
+    
   }, []);
 
   return (

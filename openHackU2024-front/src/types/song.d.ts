@@ -1,3 +1,4 @@
+import { ErrorResponse } from 'react-router-dom';
 export type AccountAlinePostRequest = {
     spotify_data: string;
     display_name: string;
@@ -48,3 +49,9 @@ type SongData = {
     song_artist : string;
     overlap : number;
 };
+
+export type ErrorResponse = {  
+    states: string;
+    error : string;
+};
+    
