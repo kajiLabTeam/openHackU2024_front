@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AccountAlinePostRequest,ErrorResponse,RoomAccessPostRequest, RoomAccessPostResponse, AccountAlinePostResponse ,RoomJoinPostRequest,RoomJoinPostResponse} from '../types/song';
+import { AccountAlinePostRequest,ErrorResponse,RoomAccessPostRequest,RoomGetPostRequest, RoomAccessPostResponse, AccountAlinePostResponse ,RoomJoinPostRequest,RoomJoinPostResponse} from '../types/song';
 
 export const useSong = () => {
     const postAccount = async (request: AccountAlinePostRequest): Promise<AccountAlinePostResponse | ErrorResponse> => {
@@ -19,7 +19,7 @@ export const useSong = () => {
     };
 
     const postRoomAccess = async (request: RoomAccessPostRequest): Promise<RoomAccessPostResponse| ErrorResponse> => {
-        const response = await fetch("https://tomato.kitune-udon.com/api/room/access", {
+        const response = await fetch("http://10.14.1.118:8888/api/room/access", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -34,8 +34,8 @@ export const useSong = () => {
         return data;
     };
 
-    const postRoomGet = async (request: RoomAccessPostRequest): Promise<RoomAccessPostResponse| ErrorResponse> => {
-        const response = await fetch("https://tomato.kitune-udon.com/api/room/get", {
+    const postRoomGet = async (request: RoomGetPostRequest): Promise<RoomGetPostRequest| ErrorResponse> => {
+        const response = await fetch("http://10.14.1.118:8888/api/room/get", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export const useSong = () => {
             const data: ErrorResponse = await response.json();
             return data;
         }
-        const data: RoomAccessPostResponse = await response.json();
+        const data: RoomGetPostRequest = await response.json();
         return data;
     }
 

@@ -32,6 +32,8 @@ export type RoomJoinPostResponse = {
   
 export type RoomGetPostRequest = {
     pass: string;
+    display_name: string;
+    user_id: string;
 };
 
 export type RoomGetPostResponse = {
