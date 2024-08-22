@@ -1,5 +1,5 @@
 export type getUserPlaylistRequest = {
-    spotify_date: Spotify_date[];
+    spotify_data: SpotifyData[];
     display_name: string;
     user_id: string;
 };
