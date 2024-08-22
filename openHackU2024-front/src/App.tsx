@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Login from './Login';
 import LoggedIn from './loggedin';
-import { getTokenFromUrl,getUserPlaylists } from './hooks/Spotify';
+import { getTokenFromUrl,formatSpotifyData } from './hooks/Spotify';
 import { useSong } from './hooks/song';
 
 // トークンの型を定義
@@ -39,8 +39,13 @@ export function App() {
 
   const onClickGetPlaylists = async () => {
     if (token) {
-      const response = await getUserPlaylists(token);
-      console.log(response);
+      const response = await formatSpotifyData(token);
+      const request = {
+        spotify_date: response,
+        display_name: "test",
+        user_id: "test",
+      };
+      console.log(request);
     }
   }
 

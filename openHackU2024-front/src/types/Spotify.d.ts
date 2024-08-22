@@ -1,14 +1,14 @@
 export type getUserPlaylistRequest = {
-    spotify_date: Playlist[];
+    spotify_date: Spotify_date[];
     display_name: string;
     user_id: string;
 };
 
-type Playlists = {  
-    playlist:Songs[];
+export type SongData = {
+    song: string;
+    artist: string;
 };
-
-type Songs = { 
-    song : string;
-    artist : string;
+  
+export type SpotifyData = {
+    [playlistName: string]: SongData[];
 };

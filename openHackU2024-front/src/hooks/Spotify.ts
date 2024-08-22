@@ -1,6 +1,6 @@
-import { getUserPlaylistRequest} from '../types/Spotify';
+import { SpotifyData,SongData } from '../types/Spotify'; // 型定義をインポート
 
-//Spotifyの認証とAPIエンドポイントの定義
+// Spotifyの認証エンドポイントとAPIエンドポイントの定義
 export const authEndpoint: string = "https://accounts.spotify.com/authorize";
 export const PLAYLISTS_ENDPOINT: string = "https://api.spotify.com/v1/me/playlists";
 
@@ -34,23 +34,55 @@ export const accessUrl: string = `${authEndpoint}?client_id=${clientId}&redirect
   "%20"
 )}&response_type=token&show_dialog=true`;
 
-// プレイリスト取得関数に型定義を追加
-export const getUserPlaylists = async (access_token: string): Promise<getUserPlaylistRequest> => {
-    try {
-        const response = await fetch(PLAYLISTS_ENDPOINT, {
-            headers: {
-                Authorization: `Bearer ${access_token}`,
-            },
-        });
 
-        if (response.ok) {
-            const data: getUserPlaylistRequest = await response.json();
-            return data; // プレイリストのリストを返す
-        } else {
-            throw new Error(`Failed to fetch playlists: ${response.status}`);
-        }
-    } catch (error) {
-        console.error(error);
-        return { spotify_date: [], display_name: "", user_id: "" };
+// プレイリストデータを指定のJSON形式に整形する関数
+export const formatSpotifyData = async (access_token: string): Promise<SpotifyData> => {
+  try {
+    // ユーザーのプレイリストを取得
+    const playlistsResponse = await fetch(PLAYLISTS_ENDPOINT, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+
+    if (!playlistsResponse.ok) {
+      throw new Error(`Failed to fetch playlists: ${playlistsResponse.status}`);
     }
+
+    const playlistsData = await playlistsResponse.json();
+    const spotifyData: SpotifyData = {};
+
+    // 各プレイリストごとの楽曲データを取得
+    for (const playlist of playlistsData.items) {
+      const playlistName = playlist.name;
+
+      // プレイリストのトラックデータを取得
+      const tracksResponse = await fetch(playlist.tracks.href, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      });
+
+      if (!tracksResponse.ok) {
+        throw new Error(`Failed to fetch tracks for playlist ${playlistName}: ${tracksResponse.status}`);
+      }
+
+      const tracksData = await tracksResponse.json();
+
+      // トラックデータをフォーマットして、"song" と "artist" に整形
+      const formattedTracks: SongData[] = tracksData.items.map((trackItem: any) => ({
+        song: trackItem.track.name,
+        artist: trackItem.track.artists.map((artist: any) => artist.name).join(', '),
+      }));
+
+      // プレイリスト名をキーとして楽曲データを格納
+      spotifyData[playlistName] = formattedTracks;
+    }
+
+    return spotifyData;
+
+  } catch (error) {
+    console.error("Error formatting Spotify data:", error);
+    throw error;
+  }
 };
