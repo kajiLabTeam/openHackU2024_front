@@ -1,3 +1,4 @@
+import { ErrorResponse } from 'react-router-dom';
 export type AccountAlinePostRequest = {
     spotify_data: string;
     display_name: string;
@@ -31,6 +32,8 @@ export type RoomJoinPostResponse = {
   
 export type RoomGetPostRequest = {
     pass: string;
+    display_name: string;
+    user_id: string;
 };
 
 export type RoomGetPostResponse = {
@@ -48,3 +51,9 @@ type SongData = {
     song_artist : string;
     overlap : number;
 };
+
+export type ErrorResponse = {  
+    states: string;
+    error : string;
+};
+    
