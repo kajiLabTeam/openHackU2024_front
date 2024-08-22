@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { AccountAlinePostRequest,ErrorResponse,RoomAccessPostRequest,RoomGetPostRequest, RoomAccessPostResponse, AccountAlinePostResponse ,RoomJoinPostRequest,RoomJoinPostResponse} from '../types/song';
 
 export const useSong = () => {
@@ -8,7 +7,7 @@ export const useSong = () => {
             headers: {
                 "Content-Type": "application/json",
              },
-            body: JSON.stringify({request}),
+            body: JSON.stringify(request),
         });
         if(response.status !== 200){
             const data: ErrorResponse = await response.json();
@@ -24,7 +23,7 @@ export const useSong = () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({request}),
+            body: JSON.stringify(request),
         });
         if(response.status !== 200){
             const data: ErrorResponse = await response.json();
@@ -40,7 +39,7 @@ export const useSong = () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({request}),
+            body: JSON.stringify(request),
         });
         if(response.status !== 200){
             const data: ErrorResponse = await response.json();
@@ -56,7 +55,7 @@ export const useSong = () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({request}),
+            body: JSON.stringify(request),
         });
         if(response.status !== 200){
             const data: ErrorResponse = await response.json();
