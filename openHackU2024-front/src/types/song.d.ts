@@ -1,8 +1,17 @@
 import { ErrorResponse } from 'react-router-dom';
 export type AccountAlinePostRequest = {
-    spotify_data: string;
+    spotify_data: SpotifyData;
     display_name: string;
     user_id: string;
+};
+
+export type SongData = {
+    song: string;
+    artist: string;
+};
+  
+export type SpotifyData = {
+    [playlistName: string]: SongData[];
 };
 
 export type AccountAlinePostResponse = {

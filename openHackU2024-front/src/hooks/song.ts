@@ -3,7 +3,7 @@ import { AccountAlinePostRequest,ErrorResponse,RoomAccessPostRequest,RoomGetPost
 
 export const useSong = () => {
     const postAccount = async (request: AccountAlinePostRequest): Promise<AccountAlinePostResponse | ErrorResponse> => {
-        const response = await fetch("https://tomato.kitune-udon.com/api/account/align", {
+        const response = await fetch("http://192.168.101.23:8888/api/account/align", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export const useSong = () => {
     };
 
     const postRoomAccess = async (request: RoomAccessPostRequest): Promise<RoomAccessPostResponse| ErrorResponse> => {
-        const response = await fetch("http://10.14.1.118:8888/api/room/access", {
+        const response = await fetch("http://127.0.0.1:8888/api/room/access", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export const useSong = () => {
     };
 
     const postRoomGet = async (request: RoomGetPostRequest): Promise<RoomGetPostRequest| ErrorResponse> => {
-        const response = await fetch("http://10.14.1.118:8888/api/room/get", {
+        const response = await fetch("http://192.168.101.23:8888/api/room/get", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

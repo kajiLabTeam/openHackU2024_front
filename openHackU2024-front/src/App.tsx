@@ -4,6 +4,7 @@ import Login from './Login';
 import LoggedIn from './loggedin';
 import { getTokenFromUrl,formatSpotifyData } from './hooks/Spotify';
 import { useSong } from './hooks/song';
+import { AccountAlinePostRequest } from './types/song';
 
 // トークンの型を定義
 type Token = string | null;
@@ -40,12 +41,15 @@ export function App() {
   const onClickGetPlaylists = async () => {
     if (token) {
       const response = await formatSpotifyData(token);
-      const request = {
-        spotify_date: response,
+      const request:AccountAlinePostRequest = {
+        spotify_data: response,
         display_name: "test",
         user_id: "test",
       };
       console.log(request);
+      const response2 = await postAccount(request);
+
+      console.log(response2);
     }
   }
 
