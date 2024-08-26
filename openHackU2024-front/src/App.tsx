@@ -53,6 +53,16 @@ export function App() {
     }
   }
 
+  const onClickRoomJoin = async () => {
+    const request = {
+      pass: "とめぇぃとぉ",
+      display_name: "test",
+      user_id: "test",
+    };
+    const response = await postRoomJoin(request);
+    console.log(response);
+  }
+
   // useStateに型注釈を追加
   const [token, setToken] = useState<Token>(null);
 
@@ -77,7 +87,8 @@ export function App() {
     <div className="App">
       {token ? <LoggedIn /> : <Login />}
       <button onClick={onClickRoomAccess}>部屋に入る</button>
-      <button onClick={onClickRoomGet}>部屋に入る</button>
+      <button onClick={onClickRoomGet}>データの取得</button>
+      <button onClick={onClickRoomJoin}>部屋に参加</button>
       <button onClick={onClickGetPlaylists}>プレイリストを取得</button>
     </div>
   );

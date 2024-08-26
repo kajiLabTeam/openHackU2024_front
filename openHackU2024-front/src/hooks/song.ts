@@ -18,7 +18,7 @@ export const useSong = () => {
     };
 
     const postRoomAccess = async (request: RoomAccessPostRequest): Promise<RoomAccessPostResponse| ErrorResponse> => {
-        const response = await fetch("http://127.0.0.1:8888/api/room/access", {
+        const response = await fetch("http://192.168.101.23:8888/api/room/access", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export const useSong = () => {
     }
 
     const postRoomJoin = async (request: RoomJoinPostRequest): Promise<RoomJoinPostResponse| ErrorResponse> => {
-        const response = await fetch("https://tomato.kitune-udon.com/api/room/join", {
+        const response = await fetch("http://192.168.101.23:8888/api/room/join", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
