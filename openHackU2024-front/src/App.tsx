@@ -20,7 +20,7 @@ export function App() {
 
   const onClickRoomAccess = async () => {
     const request = {
-      pass: "test",
+      pass: "とめぇぃとぉ",
       display_name: "test",
       user_id: "test",
     };
