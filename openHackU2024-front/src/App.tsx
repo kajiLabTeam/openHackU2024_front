@@ -1,70 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Login from './Login';
-import LoggedIn from './loggedin';
-import { getTokenFromUrl,formatSpotifyData } from './hooks/Spotify';
-import { useSong } from './hooks/song';
+import { getTokenFromUrl,accessUrl,formatSpotifyData } from './hooks/Spotify';
+import { SpotifyData } from './types/Spotify';
+import { v4 as uuidv4 } from 'uuid';
+// import { useHistory } from 'react-router-dom';  // ページ遷移用
 import { AccountAlinePostRequest } from './types/song';
+import { useSong } from './hooks/song';
 
 // トークンの型を定義
 type Token = string | null;
 
 export function App() {
 
-  const {
-    postAccount,
-    postRoomAccess,
-    postRoomGet,
-    postRoomJoin,
-  } = useSong();
-
-  const onClickRoomAccess = async () => {
-    const request = {
-      pass: "とめぇぃとぉ",
-      display_name: "test",
-      user_id: "test",
-    };
-    const response = await postRoomAccess(request);
-    console.log(response);
-  }
-
-  const onClickRoomGet = async () => {    
-    const request = {
-      pass: "とめぇぃとぉ",
-      display_name: "test",
-      user_id: "test",
-    };
-    const response = await postRoomGet(request);
-    console.log(response);
-  }
-
-  const onClickGetPlaylists = async () => {
-    if (token) {
-      const response = await formatSpotifyData(token);
-      const request:AccountAlinePostRequest = {
-        spotify_data: response,
-        display_name: "test",
-        user_id: "test",
-      };
-      console.log(request);
-      const response2 = await postAccount(request);
-
-      console.log(response2);
-    }
-  }
-
-  const onClickRoomJoin = async () => {
-    const request = {
-      pass: "とめぇぃとぉ",
-      display_name: "test",
-      user_id: "test",
-    };
-    const response = await postRoomJoin(request);
-    console.log(response);
-  }
+    const {
+        postAccount,
+      } = useSong();
 
   // useStateに型注釈を追加
   const [token, setToken] = useState<Token>(null);
+//   const history = useHistory();  // ページ遷移用
 
   useEffect(() => {
     const hash = getTokenFromUrl(); // getTokenFromUrlが正しい構造を返すことを確認
@@ -83,13 +37,47 @@ export function App() {
 
   }, []);
 
+  const handleLogin = () => {
+    window.location.href = accessUrl;  // Spotifyログインページにリダイレクト
+  };
+
+  const handleSubmit = async () => {
+    if (token) {
+        try {
+            // Spotifyからデータを取得
+            const spotifyData: SpotifyData = await formatSpotifyData(token);
+
+            // ユニークIDを生成
+            const userId: string = uuidv4();
+
+            console.log(userId)
+
+            // display_nameを取得
+            const displayName: string = (document.getElementById('display_name') as HTMLInputElement).value;
+
+            const request:AccountAlinePostRequest = {
+                spotify_data: spotifyData,
+                display_name: displayName,
+                user_id: userId,
+              };
+
+            console.log(request);
+            const response2 = await postAccount(request);
+            console.log(response2);
+
+            // 送信後、ページ遷移
+            history.push('/next-page');  // 次のページに遷移
+        }catch (error) {
+            console.error('Error in handleSubmit:', error);
+        }
+    }
+  };
+
   return (
     <div className="App">
-      {token ? <LoggedIn /> : <Login />}
-      <button onClick={onClickRoomAccess}>部屋に入る</button>
-      <button onClick={onClickRoomGet}>データの取得</button>
-      <button onClick={onClickRoomJoin}>部屋に参加</button>
-      <button onClick={onClickGetPlaylists}>プレイリストを取得</button>
+        {token ? <p>表示名</p>:null}
+        {token ? <input type="text" id="display_name" />:null}
+        {token ? <button onClick={handleSubmit}>登録</button>:<button onClick={handleLogin}>Spotifyにログイン</button>}
     </div>
   );
 }
