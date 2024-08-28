@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Login from './Login';
-import LoggedIn from './loggedin';
+import Login from './TestLogin';
+
 import { getTokenFromUrl,formatSpotifyData } from './hooks/Spotify';
 import { useSong } from './hooks/song';
 import { AccountAlinePostRequest } from './types/song';
+import LoggedIn from './LoggedIn';
 
 // トークンの型を定義
 type Token = string | null;
