@@ -1,77 +1,73 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+
 import { useSong } from "../../hooks/song";
-import { useRecoilState } from "recoil";
-import { userDataState } from "../../store/UserData";
+import { useRecoilState, useSetRecoilState } from "recoil";
+
 import { useNavigate } from "react-router-dom";
-import { RoomGetPostRequest, RoomGetPostResponse } from "../../types/song";
 
-function SongListPage() {
+import { RoomAccessPostRequest } from "../../types/song";
+
+import { getTokenFromUrl } from "../../hooks/Spotify";
+import { tokenState } from "../../store/token";
+
+import { userState } from "../../store/user";
+
+function RoomJoinPage() {
   const navigate = useNavigate();
-  const [userData, setUserData] = useRecoilState(userDataState);
-  const { postRoomAccess } = useSong();
-  const [roomData, setRoomData] = useState<RoomGetPostResponse | undefined>(
-    undefined
-  );
+  const { postRoomAccess, postRoomJoin } = useSong();
 
-  const JoinUserList = async () => {
-    const request: RoomGetPostRequest = {
-      pass: userData ? userData.pass : "",
-      display_name: userData ? userData.display_name : "",
-      user_id: userData ? userData.user_id : "",
-    };
+  const setToken = useSetRecoilState(tokenState);
+  const [user, setUser] = useRecoilState(userState);
 
-    console.log(request);
-    const response = (await postRoomAccess(
-      request
-    )) as unknown as RoomGetPostResponse;
-    setRoomData(response);
-    // setResponse(ROOM_GET_RESPONSE); // モックデータを設定
+  const handleJoin = async () => {
+    const pass = (document.getElementById("pass") as HTMLInputElement).value;
+    if (pass) {
+      try {
+        const request: RoomAccessPostRequest = {
+          pass: pass,
+          display_name: user?.name || "",
+          user_id: user?.id || "",
+        };
+
+        const response = await postRoomAccess(request);
+        console.log(response);
+        const response2 = await postRoomJoin(request);
+        console.log(response2);
+
+        setUser({
+          id: user?.id || "",
+          name: user?.name || "",
+        });
+
+        navigate("/room");
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
 
   useEffect(() => {
-    JoinUserList();
-    const intervalId = setInterval(JoinUserList, 60000); // 60000ミリ秒 = 1分
+    const hash = getTokenFromUrl(); // getTokenFromUrlが正しい構造を返すことを確認
 
-    return () => clearInterval(intervalId);
+    // URLのハッシュをクリア
+    window.location.hash = "";
+
+    const token = hash?.access_token; // オプショナルチェーンで安全にトークンを取得
+
+    if (token) {
+      setToken(token);
+    }
+
+    console.log("I HAVE A TOKEN", token);
   }, []);
 
-  if (!roomData) return <div>Loading...</div>;
-
-  // overlapの数ごとにsong_dataをグループ化
-  const groupedByOverlap: { [key: number]: typeof roomData.song_data } =
-    roomData.song_data.reduce((groups, song) => {
-      const { overlap } = song;
-      if (!groups[overlap]) {
-        groups[overlap] = [];
-      }
-      groups[overlap].push(song);
-      return groups;
-    }, {} as { [key: number]: typeof roomData.song_data });
-
   return (
-    <div>
-      <h1>Display Names</h1>
-      <ul>
-        {roomData.display_names.map((user, index) => (
-          <li key={user.user_id}>{user.display_name}</li>
-        ))}
-      </ul>
-
-      <h1>Song Data</h1>
-      {Object.keys(groupedByOverlap).map((overlap) => (
-        <div key={overlap}>
-          <h2>Overlap: {overlap} people</h2>
-          <ul>
-            {groupedByOverlap[parseInt(overlap)].map((song, index) => (
-              <li key={index}>
-                <strong>{song.song_title}</strong> by {song.song_artist}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+    <div className="Home">
+      <h2>合言葉</h2>
+      <input type="text" id="pass" />
+      <button onClick={handleJoin}>グループに参加</button>
     </div>
   );
 }
 
-export default SongListPage;
+export default RoomJoinPage;
