@@ -17,7 +17,7 @@ import { tokenState } from "../../store/token";
 import { passState } from "../../store/pass";
 import { userState } from "../../store/user";
 
-function RoomJoinPage() {
+function RoomPage() {
   const navigate = useNavigate();
   const { postRoomAccess, postRoomJoin,postAccount } = useSong();
 
@@ -101,4 +101,4 @@ function RoomJoinPage() {
   );
 }
 
-export default RoomJoinPage;
+export default RoomPage;
