@@ -1,16 +1,14 @@
-import { useState, useEffect } from "react";
-
-import { useSong } from "../hooks/song";
+import { useSong } from "../../hooks/song";
 import { useRecoilState } from "recoil";
-import { globalFunctionState } from "../store/UserData";
+import { userDataState } from "../../store/UserData";
 import { useNavigate } from "react-router-dom";
 
-import { RoomAccessPostRequest } from "../types/song";
+import { RoomAccessPostRequest } from "../../types/song";
 
-function Home() {
+function RoomCreatePage() {
   const navigate = useNavigate();
-  const { postRoomAccess,postRoomJoin } = useSong();
-  const [userData, setUserData] = useRecoilState(globalFunctionState);
+  const { postRoomAccess, postRoomJoin } = useSong();
+  const [userData, setUserData] = useRecoilState(userDataState);
 
   const handleJoin = async () => {
     const pass = (document.getElementById("pass") as HTMLInputElement).value;
@@ -29,16 +27,16 @@ function Home() {
         console.log(response2);
 
         setUserData({
-          user_id:userData ? userData.user_id : "",
+          user_id: userData ? userData.user_id : "",
           display_name: userData ? userData?.display_name : "",
           pass: pass,
-        })
+        });
         navigate("/room");
       } catch (error) {
         console.error(error);
       }
     }
-  }
+  };
 
   return (
     <div className="Home">
@@ -46,7 +44,7 @@ function Home() {
       <input type="text" id="pass" />
       <button onClick={handleJoin}>グループに参加</button>
     </div>
-  )
+  );
 }
 
-export default Home
+export default RoomCreatePage;

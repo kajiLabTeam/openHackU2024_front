@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
-import { useSong } from "../hooks/song";
+import { useSong } from "../../hooks/song";
 import { useRecoilState } from "recoil";
-import { globalFunctionState } from "../store/UserData";
+import { userDataState } from "../../store/UserData";
 import { useNavigate } from "react-router-dom";
-import { RoomGetPostRequest, RoomGetPostResponse } from "../types/song";
-import { ROOM_GET_RESPONSE } from "../const";
+import { RoomGetPostRequest, RoomGetPostResponse } from "../../types/song";
 
-function Room() {
+function SongListPage() {
   const navigate = useNavigate();
-  const [userData, setUserData] = useRecoilState(globalFunctionState);
+  const [userData, setUserData] = useRecoilState(userDataState);
   const { postRoomAccess } = useSong();
-  const [response, setResponse] = useState<RoomGetPostResponse | null>(null);
+  const [roomData, setRoomData] = useState<RoomGetPostResponse | undefined>(
+    undefined
+  );
 
   const JoinUserList = async () => {
     const request: RoomGetPostRequest = {
@@ -20,8 +21,10 @@ function Room() {
     };
 
     console.log(request);
-    response = await postRoomAccess(request) as unknown as RoomGetPostResponse;
-    console.log(response);
+    const response = (await postRoomAccess(
+      request
+    )) as unknown as RoomGetPostResponse;
+    setRoomData(response);
     // setResponse(ROOM_GET_RESPONSE); // モックデータを設定
   };
 
@@ -32,29 +35,30 @@ function Room() {
     return () => clearInterval(intervalId);
   }, []);
 
-  if (!response) return <div>Loading...</div>;
+  if (!roomData) return <div>Loading...</div>;
 
   // overlapの数ごとにsong_dataをグループ化
-  const groupedByOverlap: { [key: number]: typeof response.song_data } = response.song_data.reduce((groups, song) => {
-    const { overlap } = song;
-    if (!groups[overlap]) {
-      groups[overlap] = [];
-    }
-    groups[overlap].push(song);
-    return groups;
-  }, {} as { [key: number]: typeof response.song_data });
+  const groupedByOverlap: { [key: number]: typeof roomData.song_data } =
+    roomData.song_data.reduce((groups, song) => {
+      const { overlap } = song;
+      if (!groups[overlap]) {
+        groups[overlap] = [];
+      }
+      groups[overlap].push(song);
+      return groups;
+    }, {} as { [key: number]: typeof roomData.song_data });
 
   return (
     <div>
       <h1>Display Names</h1>
       <ul>
-        {response.display_names.map((user, index) => (
+        {roomData.display_names.map((user, index) => (
           <li key={user.user_id}>{user.display_name}</li>
         ))}
       </ul>
 
       <h1>Song Data</h1>
-      {Object.keys(groupedByOverlap).map(overlap => (
+      {Object.keys(groupedByOverlap).map((overlap) => (
         <div key={overlap}>
           <h2>Overlap: {overlap} people</h2>
           <ul>
@@ -70,4 +74,4 @@ function Room() {
   );
 }
 
-export default Room;
+export default SongListPage;
