@@ -1,14 +1,23 @@
+import { useEffect } from "react";
+
 import { useSong } from "../../hooks/song";
-import { useRecoilState } from "recoil";
-import { userDataState } from "../../store/UserData";
+import { useRecoilState, useSetRecoilState } from "recoil";
+
 import { useNavigate } from "react-router-dom";
 
 import { RoomAccessPostRequest } from "../../types/song";
 
-function RoomCreatePage() {
+import { getTokenFromUrl } from "../../hooks/Spotify";
+import { tokenState } from "../../store/token";
+
+import { userState } from "../../store/user";
+
+function RoomJoinPage() {
   const navigate = useNavigate();
   const { postRoomAccess, postRoomJoin } = useSong();
-  const [userData, setUserData] = useRecoilState(userDataState);
+
+  const setToken = useSetRecoilState(tokenState);
+  const [user, setUser] = useRecoilState(userState);
 
   const handleJoin = async () => {
     const pass = (document.getElementById("pass") as HTMLInputElement).value;
@@ -16,27 +25,41 @@ function RoomCreatePage() {
       try {
         const request: RoomAccessPostRequest = {
           pass: pass,
-          display_name: userData ? userData.display_name : "",
-          user_id: userData ? userData.user_id : "",
+          display_name: user?.name || "",
+          user_id: user?.id || "",
         };
 
-        console.log(request);
         const response = await postRoomAccess(request);
         console.log(response);
         const response2 = await postRoomJoin(request);
         console.log(response2);
 
-        setUserData({
-          user_id: userData ? userData.user_id : "",
-          display_name: userData ? userData?.display_name : "",
-          pass: pass,
+        setUser({
+          id: user?.id || "",
+          name: user?.name || "",
         });
+
         navigate("/room");
       } catch (error) {
         console.error(error);
       }
     }
   };
+
+  useEffect(() => {
+    const hash = getTokenFromUrl(); // getTokenFromUrlが正しい構造を返すことを確認
+
+    // URLのハッシュをクリア
+    window.location.hash = "";
+
+    const token = hash?.access_token; // オプショナルチェーンで安全にトークンを取得
+
+    if (token) {
+      setToken(token);
+    }
+
+    console.log("I HAVE A TOKEN", token);
+  }, []);
 
   return (
     <div className="Home">
@@ -47,4 +70,4 @@ function RoomCreatePage() {
   );
 }
 
-export default RoomCreatePage;
+export default RoomJoinPage;
