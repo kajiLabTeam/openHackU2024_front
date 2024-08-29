@@ -10,6 +10,9 @@ import { useNavigate } from "react-router-dom";
 import { AccountAlinePostRequest } from "../types/song";
 import { useSong } from "../hooks/song";
 
+import { useSetRecoilState } from "recoil";
+import { globalFunctionState } from "../store/UserData";
+
 // トークンの型を定義
 type Token = string | null;
 
@@ -20,6 +23,7 @@ export function Login() {
 
   // useStateに型注釈を追加
   const [token, setToken] = useState<Token>(null);
+  const setUserData = useSetRecoilState(globalFunctionState);
   //   const history = useHistory();  // ページ遷移用
 
   useEffect(() => {
@@ -50,6 +54,7 @@ export function Login() {
 
         // ユニークIDを生成
         const userId: string = uuidv4();
+        
 
         console.log(userId);
 
@@ -58,6 +63,12 @@ export function Login() {
           document.getElementById("display_name") as HTMLInputElement
         ).value;
 
+        setUserData({
+          user_id: userId,
+          display_name: displayName,
+          pass: "",
+        })
+
         const request: AccountAlinePostRequest = {
           spotify_data: spotifyData,
           display_name: displayName,
@@ -65,9 +76,10 @@ export function Login() {
         };
 
         console.log(request);
-        const response2 = await postAccount(request);
-        console.log(response2);
+        // const response2 = await postAccount(request);
+        // console.log(response2);
 
+        
         // 送信後、ページ遷移
         navigate("/home"); // 次のページに遷移
       } catch (error) {
