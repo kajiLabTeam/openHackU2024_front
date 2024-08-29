@@ -23,13 +23,10 @@ function Home() {
         };
 
         console.log(request);
-        /*
         const response = await postRoomAccess(request);
         console.log(response);
         const response2 = await postRoomJoin(request);
         console.log(response2);
-        */
-        
 
         setUserData({
           user_id:userData ? userData.user_id : "",

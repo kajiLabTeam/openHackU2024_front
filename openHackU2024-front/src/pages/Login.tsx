@@ -76,8 +76,8 @@ export function Login() {
         };
 
         console.log(request);
-        // const response2 = await postAccount(request);
-        // console.log(response2);
+        const response2 = await postAccount(request);
+        console.log(response2);
 
         
         // 送信後、ページ遷移
