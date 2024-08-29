@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  width: 80%;
+  height: 600px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  background-color: #ff66e8;
+  opacity: 0.6;
+  border-radius: 12px;
+  overflow-y: scroll;
+}
