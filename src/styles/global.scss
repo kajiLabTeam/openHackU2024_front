@@ -1,8 +1,10 @@
-body {
-  height: 100vh;
-
+* {
   margin: 0;
   padding: 0;
+}
+
+body {
+  height: 100vh;
 
   background: rgb(17, 196, 235);
   background: -moz-linear-gradient(
