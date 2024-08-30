@@ -162,6 +162,9 @@ export const DISPLAY_USERS = [
     name: "taro",
   },
   {
+    name: "sakina",
+  },
+  {
     name: "hanako",
   },
   {
@@ -178,5 +181,11 @@ export const DISPLAY_USERS = [
   },
   {
     name: "miho",
+  },
+  {
+    name: "iroha",
+  },
+  {
+    name: "akua",
   },
 ];
