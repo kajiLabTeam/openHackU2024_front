@@ -14,7 +14,7 @@ import { userState } from "@/store/user";
 
 import styles from "./styles.module.scss";
 import logo from "@/assets/logo.png";
-import { RoomButton } from "@/components/RoomsButton";
+import { RoomButton } from "@/components/RoomButton";
 import { RoomInput } from "@/components/RoomsInput/input";
 import {
   AccountAlinePostRequest,
@@ -25,7 +25,10 @@ import { formatSpotifyData, getTokenFromUrl } from "@/hooks/Spotify";
 
 function RoomPage() {
   const navigate = useNavigate();
+
   const { postRoomAccess, postRoomJoin, postAccount } = useSong();
+
+  const [loading, setLoading] = useState(false);
   const [passInput, setPassInput] = useState("");
   const [displayName, setDisplayName] = useState("");
 
@@ -36,6 +39,7 @@ function RoomPage() {
   useSetRecoilState(passState);
 
   const handleJoin = async () => {
+    setLoading(true);
     if (passInput && displayName) {
       try {
         console.log("token", token);
@@ -77,6 +81,7 @@ function RoomPage() {
         console.error(error);
       }
     }
+    setLoading(false);
   };
 
   useEffect(() => {
