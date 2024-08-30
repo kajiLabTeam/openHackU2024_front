@@ -1,11 +1,11 @@
 type Props = {
-  id: string;
+  type: "join" | "create";
 };
 
-function RoomSVG({ id }: Props) {
+function RoomSVG({ type }: Props) {
   return (
     <>
-      {id === "join" ? (
+      {type === "join" ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="24px"

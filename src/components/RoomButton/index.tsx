@@ -3,18 +3,18 @@ import styles from "./styles.module.scss";
 import RoomSVG from "./RoomSVG";
 
 type Props = {
-  id: string;
+  type: "join" | "create";
   children: ReactNode;
   onClick: () => void;
 };
 
-export const RoomButton = ({ onClick, children, id }: Props) => {
+export const RoomButton = ({ type, children, onClick }: Props) => {
   return (
     <button className={styles.button} onClick={onClick}>
       <div>
-        <RoomSVG id={id} />
+        <RoomSVG type={type} />
       </div>
-      <div>{children}</div>
+      <p>{children}</p>
     </button>
   );
 };

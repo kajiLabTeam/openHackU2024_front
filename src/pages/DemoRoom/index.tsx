@@ -69,42 +69,42 @@ function DemoRoomPage() {
   };
 
   return (
-    <div className={styles.container}>
+    <>
       {loading ? (
         <LoadingSpinner />
       ) : (
         <>
-          <div className={styles.imgContainer}>
-            <img src={logo} alt="Logo" />
-          </div>
-          <div className={styles.divContainer}>
-            <h1 className={styles.h1Container}>部屋</h1>
-
-            <div className={styles.inputContainer}>
-              <RoomInput
-                value={passInput}
-                placeholder="合言葉を入力"
-                onChange={(e) => setPassInput(e.target.value)}
-              />
-              <RoomInput
-                value={displayName}
-                placeholder="表示名を入力"
-                onChange={(e) => setDisplayName(e.target.value)}
-              />
+          <div className={styles.container}>
+            <div className={styles.imgContainer}>
+              <img src={logo} alt="Logo" />
             </div>
-          </div>
-
-          <div className={styles.buttonContainer}>
-            <RoomButton onClick={handleJoin} id="make">
-              作成
-            </RoomButton>
-            <RoomButton onClick={handleJoin} id="join">
-              参加
-            </RoomButton>
+            <div className={styles.roomContainer}>
+              <h1 className={styles.h1Container}>部屋</h1>
+              <div className={styles.inputContainer}>
+                <RoomInput
+                  value={passInput}
+                  placeholder="合言葉を入力"
+                  onChange={(e) => setPassInput(e.target.value)}
+                />
+                <RoomInput
+                  value={displayName}
+                  placeholder="表示名を入力"
+                  onChange={(e) => setDisplayName(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className={styles.buttonContainer}>
+              <RoomButton onClick={handleJoin} type="create">
+                作成
+              </RoomButton>
+              <RoomButton onClick={handleJoin} type="join">
+                参加
+              </RoomButton>
+            </div>
           </div>
         </>
       )}
-    </div>
+    </>
   );
 }
 
