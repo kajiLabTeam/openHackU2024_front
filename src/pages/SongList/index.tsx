@@ -19,15 +19,15 @@ function SongListPage() {
 
   return (
     <div className={styles.container}>
-      <div>
+      <section>
         <AvatarList displayUsers={displayUsers} />
-      </div>
-      <div>
+      </section>
+      <section>
         <RoomText password="とめぃとぅ" />
-      </div>
-      <div className={styles.songListContainer}>
+      </section>
+      <section className={styles.songListContainer}>
         <SongList songData={ROOM_GET_RESPONSE.song_data} />
-      </div>
+      </section>
     </div>
   );
 }
