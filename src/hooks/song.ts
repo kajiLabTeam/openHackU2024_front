@@ -7,7 +7,7 @@ import {
   AccountAlinePostResponse,
   RoomJoinPostRequest,
   RoomJoinPostResponse,
-} from "@types/song";
+} from "@/types/song";
 
 export const useSong = () => {
   const postAccount = async (
