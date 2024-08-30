@@ -1,6 +1,9 @@
 .button {
     width: 180px;
     height: 60px;
+
+    display: flex;
+    align-items: center;
   
     font-size: 24px;
     font-weight: bold;
@@ -13,4 +16,9 @@
   
     border: none;
   }
+.logo{
+    width: 60%;
+    height: 60%;
+}
+
   

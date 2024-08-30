@@ -124,8 +124,8 @@ function RoomPage() {
       </div>
 
       <div className={styles.buttonContainer}>
-        <RoomButton onClick={handleJoin}>作成</RoomButton>
-        <RoomButton onClick={handleJoin}>参加</RoomButton>
+        <RoomButton onClick={handleJoin} id = "make">作成</RoomButton>
+        <RoomButton onClick={handleJoin} id = "join">参加</RoomButton>
       </div>
     </div>
   );
