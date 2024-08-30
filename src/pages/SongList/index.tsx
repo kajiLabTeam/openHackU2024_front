@@ -56,7 +56,7 @@ function SongListPage() {
         <AvatarList displayUsers={displayUsers} />
       </section>
       <section>
-        <RoomText password="とめぇぃとぅ" />
+        <RoomText password={pass} />
       </section>
       <section className={styles.songListContainer}>
         <SongList songData={songData} />

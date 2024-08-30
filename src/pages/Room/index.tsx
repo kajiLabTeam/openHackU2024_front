@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
-
 import { useSong } from "@/hooks/song";
-
 import { useRecoilState, useSetRecoilState } from "recoil";
-
 import { useNavigate } from "react-router-dom";
-
 import { v4 as uuidv4 } from "uuid";
 
 import { tokenState } from "@/store/token";
@@ -14,7 +10,7 @@ import { userState } from "@/store/user";
 
 import styles from "./styles.module.scss";
 import logo from "@/assets/logo.png";
-import { RoomButton } from "@/components/RoomsButton";
+import { RoomButton } from "@/components/RoomButton";
 import { RoomInput } from "@/components/RoomsInput/input";
 import {
   AccountAlinePostRequest,
@@ -22,10 +18,14 @@ import {
   SpotifyData,
 } from "@/types/song";
 import { formatSpotifyData, getTokenFromUrl } from "@/hooks/Spotify";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 function RoomPage() {
   const navigate = useNavigate();
+
   const { postRoomAccess, postRoomJoin, postAccount } = useSong();
+
+  const [loading, setLoading] = useState(false);
   const [passInput, setPassInput] = useState("");
   const [displayName, setDisplayName] = useState("");
 
@@ -36,6 +36,7 @@ function RoomPage() {
   useSetRecoilState(passState);
 
   const handleJoin = async () => {
+    setLoading(true);
     if (passInput && displayName) {
       try {
         console.log("token", token);
@@ -77,6 +78,7 @@ function RoomPage() {
         console.error(error);
       }
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -96,34 +98,40 @@ function RoomPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.imgContainer}>
-        <img src={logo} alt="Logo" />
-      </div>
-      <div className={styles.divContainer}>
-        <h1 className={styles.h1Container}>部屋</h1>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <div className={styles.imgContainer}>
+            <img src={logo} alt="Logo" />
+          </div>
+          <div className={styles.divContainer}>
+            <h1 className={styles.h1Container}>部屋</h1>
 
-        <div className={styles.inputContainer}>
-          <RoomInput
-            value={passInput}
-            placeholder="合言葉を入力"
-            onChange={(e) => setPassInput(e.target.value)}
-          />
-          <RoomInput
-            value={displayName}
-            placeholder="表示名を入力"
-            onChange={(e) => setDisplayName(e.target.value)}
-          />
-        </div>
-      </div>
+            <div className={styles.inputContainer}>
+              <RoomInput
+                value={passInput}
+                placeholder="合言葉を入力"
+                onChange={(e) => setPassInput(e.target.value)}
+              />
+              <RoomInput
+                value={displayName}
+                placeholder="表示名を入力"
+                onChange={(e) => setDisplayName(e.target.value)}
+              />
+            </div>
+          </div>
 
-      <div className={styles.buttonContainer}>
-        <RoomButton onClick={handleJoin} id="make">
-          作成
-        </RoomButton>
-        <RoomButton onClick={handleJoin} id="join">
-          参加
-        </RoomButton>
-      </div>
+          <div className={styles.buttonContainer}>
+            <RoomButton onClick={handleJoin} id="make">
+              作成
+            </RoomButton>
+            <RoomButton onClick={handleJoin} id="join">
+              参加
+            </RoomButton>
+          </div>
+        </>
+      )}
     </div>
   );
 }
