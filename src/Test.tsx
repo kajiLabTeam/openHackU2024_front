@@ -1,23 +1,17 @@
-import { useState, useEffect } from 'react';
-import './App.css';
-import Login from './TestLogin';
+import { useState, useEffect } from "react";
+import "./App.css";
+import Login from "./TestLogin";
 
-import { getTokenFromUrl,formatSpotifyData } from './hooks/Spotify';
-import { useSong } from './hooks/song';
-import { AccountAlinePostRequest } from './types/song';
-import LoggedIn from './LoggedIn';
+import { getTokenFromUrl, formatSpotifyData } from "./hooks/Spotify";
+import { useSong } from "./hooks/song";
+import { AccountAlinePostRequest } from "./types/song";
+import LoggedIn from "./LoggedIn";
 
 // トークンの型を定義
 type Token = string | null;
 
 export function App() {
-
-  const {
-    postAccount,
-    postRoomAccess,
-    postRoomGet,
-    postRoomJoin,
-  } = useSong();
+  const { postAccount, postRoomAccess, postRoomGet, postRoomJoin } = useSong();
 
   const onClickRoomAccess = async () => {
     const request = {
@@ -27,9 +21,9 @@ export function App() {
     };
     const response = await postRoomAccess(request);
     console.log(response);
-  }
+  };
 
-  const onClickRoomGet = async () => {    
+  const onClickRoomGet = async () => {
     const request = {
       pass: "とめぇぃとぉ",
       display_name: "test",
@@ -37,12 +31,12 @@ export function App() {
     };
     const response = await postRoomGet(request);
     console.log(response);
-  }
+  };
 
   const onClickGetPlaylists = async () => {
     if (token) {
       const response = await formatSpotifyData(token);
-      const request:AccountAlinePostRequest = {
+      const request: AccountAlinePostRequest = {
         spotify_data: response,
         display_name: "test",
         user_id: "test",
@@ -52,7 +46,7 @@ export function App() {
 
       console.log(response2);
     }
-  }
+  };
 
   const onClickRoomJoin = async () => {
     const request = {
@@ -62,7 +56,7 @@ export function App() {
     };
     const response = await postRoomJoin(request);
     console.log(response);
-  }
+  };
 
   // useStateに型注釈を追加
   const [token, setToken] = useState<Token>(null);
@@ -72,7 +66,7 @@ export function App() {
     console.log(hash);
 
     // URLのハッシュをクリア
-    window.location.hash = '';
+    window.location.hash = "";
 
     const accessToken = hash?.access_token; // オプショナルチェーンで安全にトークンを取得
 
@@ -80,8 +74,7 @@ export function App() {
       setToken(accessToken);
     }
 
-    console.log('I HAVE A TOKEN', accessToken);
-
+    console.log("I HAVE A TOKEN", accessToken);
   }, []);
 
   return (
