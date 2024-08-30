@@ -1,13 +1,10 @@
 import { SongData, SpotifyData } from "@/types/song";
-
-// Spotifyの認証エンドポイントとAPIエンドポイントの定義
-export const authEndpoint: string = "https://accounts.spotify.com/authorize";
-export const PLAYLISTS_ENDPOINT: string =
-  "https://api.spotify.com/v1/me/playlists";
-
-const redirectUri: string = "http://localhost:5173/room";
-
-const clientId: string = "388bed2ea2634e63bf5bc7340ff51191";
+import {
+  REDIRECT_URL,
+  SPOTIFY_AUTH_URL,
+  SPOTIFY_CLIENT_ID,
+  SPOTIFY_PLAYLIST_API_URL,
+} from "@/utils/env";
 
 // 対応するスコープを定義
 const scopes: string[] = [
@@ -31,7 +28,7 @@ export const getTokenFromUrl = (): { [key: string]: string } => {
 };
 
 // SpotifyのログインページのURLを生成
-export const accessUrl: string = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+export const accessUrl: string = `${SPOTIFY_AUTH_URL}?client_id=${SPOTIFY_CLIENT_ID}&redirect_uri=${REDIRECT_URL}&scope=${scopes.join(
   "%20"
 )}&response_type=token&show_dialog=true`;
 
@@ -39,9 +36,15 @@ export const accessUrl: string = `${authEndpoint}?client_id=${clientId}&redirect
 export const formatSpotifyData = async (
   access_token: string
 ): Promise<SpotifyData> => {
+  // 環境変数が読めてるか確認
+  console.log("SPOTIFY_PLAYLIST_API_URL", SPOTIFY_PLAYLIST_API_URL);
+  console.log("REDIRECT_URL", REDIRECT_URL);
+  console.log("SPOTIFY_AUTH_URL", SPOTIFY_AUTH_URL);
+  console.log("SPOTIFY_CLIENT_ID", SPOTIFY_CLIENT_ID);
+
   try {
     // ユーザーのプレイリストを取得
-    const playlistsResponse = await fetch(PLAYLISTS_ENDPOINT, {
+    const playlistsResponse = await fetch(SPOTIFY_PLAYLIST_API_URL, {
       headers: {
         Authorization: `Bearer ${access_token}`,
       },
