@@ -1,14 +1,17 @@
-import { DisplayUser, User } from "@/types/user";
+import { DisplayName } from "@/types/song";
+import { DisplayUser } from "@/types/user";
 
 function assignAvatarsToUsers(
-  users: User[],
+  displayName: DisplayName[],
   avatars: string[],
   defaultAvatar: string
 ): DisplayUser[] {
-  return users.map((user, index) => ({
-    ...user,
-    avatar: avatars[index] || defaultAvatar,
-  }));
+  return displayName.map((user, index) => {
+    return {
+      name: user.display_name,
+      avatar: avatars[index] || defaultAvatar,
+    };
+  });
 }
 
 function createEmptyUsers(count: number, defaultAvatar: string): DisplayUser[] {
@@ -16,12 +19,12 @@ function createEmptyUsers(count: number, defaultAvatar: string): DisplayUser[] {
 }
 
 export function generateDisplayUsers(
-  users: User[],
+  displayName: DisplayName[],
   avatars: string[],
   defaultAvatar: string,
   totalSlots: number
 ): DisplayUser[] {
-  const mappedUsers = assignAvatarsToUsers(users, avatars, defaultAvatar);
+  const mappedUsers = assignAvatarsToUsers(displayName, avatars, defaultAvatar);
   const emptySlotsCount = totalSlots - mappedUsers.length;
   const emptyUsers = createEmptyUsers(
     Math.max(emptySlotsCount, 0),

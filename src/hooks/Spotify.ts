@@ -5,7 +5,7 @@ export const authEndpoint: string = "https://accounts.spotify.com/authorize";
 export const PLAYLISTS_ENDPOINT: string =
   "https://api.spotify.com/v1/me/playlists";
 
-const redirectUri: string = "https://uta-match.kitune-udon.com/room";
+const redirectUri: string = "http://localhost:5173/room";
 
 const clientId: string = "388bed2ea2634e63bf5bc7340ff51191";
 
