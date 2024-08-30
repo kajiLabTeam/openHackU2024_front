@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import SpotifyLoginPage from "../pages/SpotifyLogin";
-import SongListPage from "../pages/SongList";
-import RoomPage from "../pages/RoomJoin";
+import SpotifyLoginPage from "@/pages/SpotifyLogin";
+import SongListPage from "@/pages/SongList";
+import RoomPage from "@/pages/Room";
 
 function AppRoute() {
   return (
