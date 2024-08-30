@@ -1,4 +1,4 @@
-import { SpotifyData, SongData } from "../types/Spotify"; // 型定義をインポート
+import { SpotifyData, SongData } from "@types/Spotify"; // 型定義をインポート
 
 // Spotifyの認証エンドポイントとAPIエンドポイントの定義
 export const authEndpoint: string = "https://accounts.spotify.com/authorize";

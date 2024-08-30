@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import styles from "./styles.module.scss";
-import login from "../../assets/login.svg";
-import make from "../../assets/make.svg";
+import login from "@/assets/login.svg";
+import make from "@/assets/make.svg";
 
 type Props = {
   onClick: () => void;

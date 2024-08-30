@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useSong } from "../../hooks/song";
+import { useSong } from "@/hooks/song";
 
 import { useRecoilState, useSetRecoilState } from "recoil";
 
@@ -8,20 +8,20 @@ import { useNavigate } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
 
-import { tokenState } from "../../store/token";
-import { passState } from "../../store/pass";
-import { userState } from "../../store/user";
+import { tokenState } from "@/store/token";
+import { passState } from "@/store/pass";
+import { userState } from "@/store/user";
 
 import styles from "./styles.module.scss";
-import logo from "../../assets/logo.png";
-import { RoomButton } from "../../components/RoomsButton";
-import { RoomInput } from "../../components/RoomsInput/input";
+import logo from "@/assets/logo.png";
+import { RoomButton } from "@/components/RoomsButton";
+import { RoomInput } from "@/components/RoomsInput/input";
 import {
   AccountAlinePostRequest,
   RoomAccessPostRequest,
   SpotifyData,
-} from "../../types/song";
-import { formatSpotifyData, getTokenFromUrl } from "../../hooks/Spotify";
+} from "@/types/song";
+import { formatSpotifyData, getTokenFromUrl } from "@/hooks/Spotify";
 
 function RoomPage() {
   const navigate = useNavigate();

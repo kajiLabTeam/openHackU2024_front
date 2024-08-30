@@ -1,5 +1,4 @@
-import { RoomAccessPostResponse, RoomGetPostResponse } from "../types/song";
-import { DisplayUser } from "../types/user";
+import { RoomAccessPostResponse, RoomGetPostResponse } from "@/types/song";
 
 export const ROOM_ACCESS_RESPONSE: RoomAccessPostResponse = {
   states: "success",
@@ -83,7 +82,7 @@ export const ROOM_GET_RESPONSE: RoomGetPostResponse = {
     {
       song_title: "夜に駆ける",
       song_artist: "YOASOBI",
-      overlap: 7,
+      overlap: 6,
     },
     {
       song_title: "Lemon",
@@ -93,102 +92,91 @@ export const ROOM_GET_RESPONSE: RoomGetPostResponse = {
     {
       song_title: "Pretender",
       song_artist: "Official髭男dism",
-      overlap: 6,
+      overlap: 4,
     },
     {
       song_title: "ドライフラワー",
       song_artist: "優里",
-      overlap: 4,
+      overlap: 3,
     },
     {
       song_title: "打上花火",
       song_artist: "DAOKO × 米津玄師",
-      overlap: 3,
+      overlap: 2,
     },
     {
       song_title: "マリーゴールド",
       song_artist: "あいみょん",
-      overlap: 8,
+      overlap: 6,
     },
     {
       song_title: "白日",
       song_artist: "King Gnu",
-      overlap: 7,
+      overlap: 5,
     },
     {
       song_title: "怪物",
       song_artist: "YOASOBI",
-      overlap: 6,
+      overlap: 4,
     },
     {
       song_title: "シンデレラボーイ",
       song_artist: "Saucy Dog",
-      overlap: 5,
+      overlap: 3,
     },
     {
       song_title: "明け星",
       song_artist: "LiSA",
-      overlap: 4,
+      overlap: 2,
     },
     {
       song_title: "ブルーベリーソーダ",
       song_artist: "SEKAI NO OWARI",
-      overlap: 3,
+      overlap: 1,
     },
     {
       song_title: "不可幸力",
       song_artist: "Vaundy",
-      overlap: 2,
+      overlap: 1,
     },
     {
       song_title: "水平線",
       song_artist: "back number",
-      overlap: 1,
+      overlap: 2,
     },
     {
       song_title: "ラブカ?",
       song_artist: "ササノマリイ",
-      overlap: 0,
+      overlap: 3,
     },
     {
       song_title: "I LOVE...",
       song_artist: "Official髭男dism",
-      overlap: 8,
+      overlap: 4,
     },
   ],
 };
 
-export const DISPLAY_USER: DisplayUser[] = [
+export const DISPLAY_USERS = [
   {
-    name: "山田 太郎",
-    avatar: "https://robohash.org/hello.png?set=set2&size=40x40",
+    name: "taro",
   },
   {
-    name: "佐藤 花子",
-    avatar: "https://robohash.org/h.png?set=set3&size=40x40",
+    name: "hanako",
   },
   {
-    name: "鈴木 一郎",
-    avatar: "https://robohash.org/hi.png?set=set4&size=40x40",
+    name: "ayaka",
   },
   {
-    name: "田中 美咲",
-    avatar: "https://robohash.org/hey.png?set=set5&size=40x40",
+    name: "mizutnai",
   },
   {
-    name: "高橋 優",
-    avatar: "https://robohash.org/hello.png?set=set2&size=40x40",
+    name: "togawa",
   },
   {
-    name: "伊藤 翔",
-    avatar: "https://robohash.org/h.png?set=set3&size=40x40",
+    name: "koki",
   },
   {
-    name: "松本 由美",
-    avatar: "https://robohash.org/hi.png?set=set4&size=40x40",
-  },
-  {
-    name: "中村 大輔",
-    avatar: "https://robohash.org/hey.png?set=set5&size=40x40",
+    name: "miho",
   },
 ];

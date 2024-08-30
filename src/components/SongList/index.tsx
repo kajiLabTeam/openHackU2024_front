@@ -1,4 +1,4 @@
-import { SongData } from "../../types/song";
+import { SongData } from "@/types/song";
 import SongItem from "./SongItem";
 import styles from "./styles.module.scss";
 

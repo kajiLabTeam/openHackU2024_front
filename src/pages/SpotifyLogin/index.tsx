@@ -1,7 +1,7 @@
-import { accessUrl } from "../../hooks/Spotify";
-import logo from "../../assets/logo.png";
+import { accessUrl } from "@/hooks/Spotify";
+import logo from "@/assets/logo.png";
 
-import { SpotifyLoginButton } from "../../components/SpotifyLoginButton";
+import { SpotifyLoginButton } from "@/components/SpotifyLoginButton";
 import styles from "./styles.module.scss";
 
 export function SpotifyLoginPage() {
