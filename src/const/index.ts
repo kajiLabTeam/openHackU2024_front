@@ -1,4 +1,5 @@
 import { RoomAccessPostResponse, RoomGetPostResponse } from "../types/song";
+import { DisplayUser } from "../types/user";
 
 export const ROOM_ACCESS_RESPONSE: RoomAccessPostResponse = {
   states: "success",
@@ -156,3 +157,38 @@ export const ROOM_GET_RESPONSE: RoomGetPostResponse = {
     },
   ],
 };
+
+export const DISPLAY_USER: DisplayUser[] = [
+  {
+    name: "山田 太郎",
+    avatar: "https://robohash.org/hello.png?set=set2&size=40x40",
+  },
+  {
+    name: "佐藤 花子",
+    avatar: "https://robohash.org/h.png?set=set3&size=40x40",
+  },
+  {
+    name: "鈴木 一郎",
+    avatar: "https://robohash.org/hi.png?set=set4&size=40x40",
+  },
+  {
+    name: "田中 美咲",
+    avatar: "https://robohash.org/hey.png?set=set5&size=40x40",
+  },
+  {
+    name: "高橋 優",
+    avatar: "https://robohash.org/hello.png?set=set2&size=40x40",
+  },
+  {
+    name: "伊藤 翔",
+    avatar: "https://robohash.org/h.png?set=set3&size=40x40",
+  },
+  {
+    name: "松本 由美",
+    avatar: "https://robohash.org/hi.png?set=set4&size=40x40",
+  },
+  {
+    name: "中村 大輔",
+    avatar: "https://robohash.org/hey.png?set=set5&size=40x40",
+  },
+];
