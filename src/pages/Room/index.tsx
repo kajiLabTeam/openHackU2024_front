@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
-
 import { useSong } from "@/hooks/song";
-
 import { useRecoilState, useSetRecoilState } from "recoil";
-
 import { useNavigate } from "react-router-dom";
-
 import { v4 as uuidv4 } from "uuid";
 
 import { tokenState } from "@/store/token";
@@ -22,6 +18,7 @@ import {
   SpotifyData,
 } from "@/types/song";
 import { formatSpotifyData, getTokenFromUrl } from "@/hooks/Spotify";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 function RoomPage() {
   const navigate = useNavigate();
@@ -101,34 +98,40 @@ function RoomPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.imgContainer}>
-        <img src={logo} alt="Logo" />
-      </div>
-      <div className={styles.divContainer}>
-        <h1 className={styles.h1Container}>部屋</h1>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <div className={styles.imgContainer}>
+            <img src={logo} alt="Logo" />
+          </div>
+          <div className={styles.divContainer}>
+            <h1 className={styles.h1Container}>部屋</h1>
 
-        <div className={styles.inputContainer}>
-          <RoomInput
-            value={passInput}
-            placeholder="合言葉を入力"
-            onChange={(e) => setPassInput(e.target.value)}
-          />
-          <RoomInput
-            value={displayName}
-            placeholder="表示名を入力"
-            onChange={(e) => setDisplayName(e.target.value)}
-          />
-        </div>
-      </div>
+            <div className={styles.inputContainer}>
+              <RoomInput
+                value={passInput}
+                placeholder="合言葉を入力"
+                onChange={(e) => setPassInput(e.target.value)}
+              />
+              <RoomInput
+                value={displayName}
+                placeholder="表示名を入力"
+                onChange={(e) => setDisplayName(e.target.value)}
+              />
+            </div>
+          </div>
 
-      <div className={styles.buttonContainer}>
-        <RoomButton onClick={handleJoin} id="make">
-          作成
-        </RoomButton>
-        <RoomButton onClick={handleJoin} id="join">
-          参加
-        </RoomButton>
-      </div>
+          <div className={styles.buttonContainer}>
+            <RoomButton onClick={handleJoin} id="make">
+              作成
+            </RoomButton>
+            <RoomButton onClick={handleJoin} id="join">
+              参加
+            </RoomButton>
+          </div>
+        </>
+      )}
     </div>
   );
 }

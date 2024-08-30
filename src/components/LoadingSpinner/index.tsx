@@ -1,11 +1,7 @@
-import "./styles.module.scss";
+import styles from "./styles.module.scss";
 
 const LoadingSpinner = () => {
-  return (
-    <div className="spinner-container">
-      <div className="spinner"></div>
-    </div>
-  );
+  return <div className={styles.loading}></div>;
 };
 
 export default LoadingSpinner;
