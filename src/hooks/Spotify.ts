@@ -1,8 +1,9 @@
-import { SpotifyData,SongData } from '../types/Spotify'; // 型定義をインポート
+import { SpotifyData, SongData } from "../types/Spotify"; // 型定義をインポート
 
 // Spotifyの認証エンドポイントとAPIエンドポイントの定義
 export const authEndpoint: string = "https://accounts.spotify.com/authorize";
-export const PLAYLISTS_ENDPOINT: string = "https://api.spotify.com/v1/me/playlists";
+export const PLAYLISTS_ENDPOINT: string =
+  "https://api.spotify.com/v1/me/playlists";
 
 const redirectUri: string = "http://localhost:5173/room";
 
@@ -21,9 +22,9 @@ const scopes: string[] = [
 export const getTokenFromUrl = (): { [key: string]: string } => {
   return window.location.hash
     .substring(1)
-    .split('&')
+    .split("&")
     .reduce<{ [key: string]: string }>((initial, item) => {
-      const parts: string[] = item.split('=');
+      const parts: string[] = item.split("=");
       initial[parts[0]] = decodeURIComponent(parts[1]);
       return initial;
     }, {});
@@ -34,9 +35,10 @@ export const accessUrl: string = `${authEndpoint}?client_id=${clientId}&redirect
   "%20"
 )}&response_type=token&show_dialog=true`;
 
-
 // プレイリストデータを指定のJSON形式に整形する関数
-export const formatSpotifyData = async (access_token: string): Promise<SpotifyData> => {
+export const formatSpotifyData = async (
+  access_token: string
+): Promise<SpotifyData> => {
   try {
     // ユーザーのプレイリストを取得
     const playlistsResponse = await fetch(PLAYLISTS_ENDPOINT, {
@@ -64,23 +66,28 @@ export const formatSpotifyData = async (access_token: string): Promise<SpotifyDa
       });
 
       if (!tracksResponse.ok) {
-        throw new Error(`Failed to fetch tracks for playlist ${playlistName}: ${tracksResponse.status}`);
+        throw new Error(
+          `Failed to fetch tracks for playlist ${playlistName}: ${tracksResponse.status}`
+        );
       }
 
       const tracksData = await tracksResponse.json();
 
       // トラックデータをフォーマットして、"song" と "artist" に整形
-      const formattedTracks: SongData[] = tracksData.items.map((trackItem: any) => ({
-        song: trackItem.track.name,
-        artist: trackItem.track.artists.map((artist: any) => artist.name).join(', '),
-      }));
+      const formattedTracks: SongData[] = tracksData.items.map(
+        (trackItem: any) => ({
+          song: trackItem.track.name,
+          artist: trackItem.track.artists
+            .map((artist: any) => artist.name)
+            .join(", "),
+        })
+      );
 
       // プレイリスト名をキーとして楽曲データを格納
       spotifyData[playlistName] = formattedTracks;
     }
 
     return spotifyData;
-
   } catch (error) {
     console.error("Error formatting Spotify data:", error);
     throw error;

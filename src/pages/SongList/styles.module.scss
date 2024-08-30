@@ -1,0 +1,13 @@
+.container {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-self: center;
+
+  .songListContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

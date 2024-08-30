@@ -1,0 +1,42 @@
+.container {
+  padding: 0 32px;
+  width: 80%;
+  height: 14%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 12px;
+  align-items: center;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.songContainer {
+  .title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .artist {
+    font-size: 10px;
+    font-weight: bold;
+    color: #747474;
+  }
+}
+
+.overlapContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 2px;
+
+  .peopleAmount {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .peopleLabel {
+    margin-bottom: 2px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
