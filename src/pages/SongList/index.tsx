@@ -1,12 +1,23 @@
+import AvatarList from "../../components/AvatarList";
+import RoomText from "../../components/RoomText";
 import SongList from "../../components/SongList";
-import { ROOM_GET_RESPONSE } from "../../const";
+import { DISPLAY_USER, ROOM_GET_RESPONSE } from "../../const";
 
+import styles from "./styles.module.scss";
 function SongListPage() {
   return (
-    <div>
-      <SongList songData={ROOM_GET_RESPONSE.song_data} />
+    <div className={styles.container}>
+      <div>
+        <AvatarList displayUsers={DISPLAY_USER} />
+      </div>
+      <div>
+        <RoomText password="とめぃとぅ" />
+      </div>
+      <div className={styles.songListContainer}>
+        <SongList songData={ROOM_GET_RESPONSE.song_data} />
+      </div>
     </div>
   );
 }
 
-export default RoomJoinPage;
+export default SongListPage;

@@ -9,9 +9,12 @@ import { useNavigate } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
 
-import { RoomAccessPostRequest,AccountAlinePostRequest } from "../../types/song";
+import {
+  RoomAccessPostRequest,
+  AccountAlinePostRequest,
+} from "../../types/song";
 
-import { getTokenFromUrl,formatSpotifyData } from "../../hooks/Spotify";
+import { getTokenFromUrl, formatSpotifyData } from "../../hooks/Spotify";
 
 import { tokenState } from "../../store/token";
 import { passState } from "../../store/pass";
@@ -19,7 +22,7 @@ import { userState } from "../../store/user";
 
 function RoomPage() {
   const navigate = useNavigate();
-  const { postRoomAccess, postRoomJoin,postAccount } = useSong();
+  const { postRoomAccess, postRoomJoin, postAccount } = useSong();
 
   const [token, setToken] = useRecoilState(tokenState);
   const setUser = useSetRecoilState(userState);
@@ -29,16 +32,18 @@ function RoomPage() {
 
   const handleJoin = async () => {
     const pass = (document.getElementById("pass") as HTMLInputElement).value;
-    const display_name = (document.getElementById("display_name") as HTMLInputElement).value;
+    const display_name = (
+      document.getElementById("display_name") as HTMLInputElement
+    ).value;
     if (pass && display_name) {
       try {
         console.log("token", token);
-        
+
         // Spotifyからデータを取得
         const spotifyData: SpotifyData = await formatSpotifyData(token);
 
-         // ユニークIDを生成
-         const userId: string = uuidv4();
+        // ユニークIDを生成
+        const userId: string = uuidv4();
 
         const request: AccountAlinePostRequest = {
           display_name: display_name,
@@ -73,7 +78,6 @@ function RoomPage() {
       }
     }
   };
-
 
   useEffect(() => {
     const hash = getTokenFromUrl(); // getTokenFromUrlが正しい構造を返すことを確認
