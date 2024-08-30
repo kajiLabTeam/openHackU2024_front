@@ -23,7 +23,7 @@ function SongListPage() {
         <AvatarList displayUsers={displayUsers} />
       </section>
       <section>
-        <RoomText password="とめぃとぅ" />
+        <RoomText password="とめぇぃとぅ" />
       </section>
       <section className={styles.songListContainer}>
         <SongList songData={ROOM_GET_RESPONSE.song_data} />

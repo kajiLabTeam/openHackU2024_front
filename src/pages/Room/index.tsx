@@ -51,8 +51,8 @@ function RoomPage() {
           spotify_data: spotifyData,
         };
 
-        // const response = await postAccount(request);
-        // console.log(response);
+        const response = await postAccount(request);
+        console.log(response);
 
         const request2: RoomAccessPostRequest = {
           pass: passInput,
@@ -60,10 +60,10 @@ function RoomPage() {
           user_id: userId,
         };
 
-        // const response2 = await postRoomAccess(request2);
-        // console.log(response2);
-        // const response3 = await postRoomJoin(request2);
-        // console.log(response3);
+        const response2 = await postRoomAccess(request2);
+        console.log(response2);
+        const response3 = await postRoomJoin(request2);
+        console.log(response3);
 
         // アカウント情報を登録
         setPassword(passInput);

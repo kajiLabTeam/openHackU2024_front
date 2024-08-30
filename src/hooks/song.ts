@@ -14,7 +14,7 @@ export const useSong = () => {
     request: AccountAlinePostRequest
   ): Promise<AccountAlinePostResponse | ErrorResponse> => {
     const response = await fetch(
-      "http://192.168.101.23:8888/api/account/align",
+      "https://uta-match.kitune-udon.com/api/account/align",
       {
         method: "POST",
         headers: {
@@ -34,7 +34,7 @@ export const useSong = () => {
   const postRoomAccess = async (
     request: RoomAccessPostRequest
   ): Promise<RoomAccessPostResponse | ErrorResponse> => {
-    const response = await fetch("http://192.168.101.23:8888/api/room/access", {
+    const response = await fetch("https://uta-match.kitune-udon.com/api/room/access", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export const useSong = () => {
   const postRoomGet = async (
     request: RoomGetPostRequest
   ): Promise<RoomGetPostRequest | ErrorResponse> => {
-    const response = await fetch("http://192.168.101.23:8888/api/room/get", {
+    const response = await fetch("https://uta-match.kitune-udon.com/api/room/get", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export const useSong = () => {
   const postRoomJoin = async (
     request: RoomJoinPostRequest
   ): Promise<RoomJoinPostResponse | ErrorResponse> => {
-    const response = await fetch("http://192.168.101.23:8888/api/room/join", {
+    const response = await fetch("https://uta-match.kitune-udon.com/api/room/join", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
