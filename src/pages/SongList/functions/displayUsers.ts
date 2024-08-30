@@ -11,12 +11,10 @@ function assignAvatarsToUsers(
   }));
 }
 
-// 空のユーザーを生成する関数
 function createEmptyUsers(count: number, defaultAvatar: string): DisplayUser[] {
   return Array(count).fill({ name: "", avatar: defaultAvatar });
 }
 
-// 全てのユーザーをまとめる関数
 export function generateDisplayUsers(
   users: User[],
   avatars: string[],

@@ -9,6 +9,7 @@ import avatar7 from "./07.png";
 import avatar8 from "./08.png";
 import avatar9 from "./09.png";
 import avatar10 from "./10.png";
+import avatar11 from "./11.png";
 
 export const AVATARS = [
   avatar1,
@@ -21,5 +22,6 @@ export const AVATARS = [
   avatar8,
   avatar9,
   avatar10,
+  avatar11,
 ];
 export const AVATAR_DEFAULT = avatarDefault;

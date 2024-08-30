@@ -171,6 +171,9 @@ export const DISPLAY_USERS = [
     name: "ayaka",
   },
   {
+    name: "mizuki",
+  },
+  {
     name: "mizutnai",
   },
   {
