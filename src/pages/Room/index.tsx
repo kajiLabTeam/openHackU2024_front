@@ -36,14 +36,9 @@ function RoomPage() {
   useSetRecoilState(passState);
 
   const handleJoin = async () => {
-    const pass = (document.getElementById("pass") as HTMLInputElement).value;
-    const display_name = (
-      document.getElementById("display_name") as HTMLInputElement
-    ).value;
-    if (pass && display_name) {
+    if (passInput && displayName) {
       try {
         console.log("token", token);
-
         // Spotifyからデータを取得
         const spotifyData: SpotifyData = await formatSpotifyData(token);
 
@@ -51,7 +46,7 @@ function RoomPage() {
         const userId: string = uuidv4();
 
         const request: AccountAlinePostRequest = {
-          display_name: display_name,
+          display_name: displayName,
           user_id: userId,
           spotify_data: spotifyData,
         };
@@ -60,8 +55,8 @@ function RoomPage() {
         // console.log(response);
 
         const request2: RoomAccessPostRequest = {
-          pass: pass,
-          display_name: display_name,
+          pass: passInput,
+          display_name: displayName,
           user_id: userId,
         };
 
@@ -71,10 +66,10 @@ function RoomPage() {
         // console.log(response3);
 
         // アカウント情報を登録
-        setPassword(pass);
+        setPassword(passInput);
         setUser({
           id: userId,
-          name: display_name,
+          name: displayName,
         });
 
         navigate("/song/list");
