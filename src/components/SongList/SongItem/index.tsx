@@ -7,7 +7,6 @@ type Props = {
 };
 
 function SongItem({ title, artist, overlap }: Props) {
-  console.log(title, artist);
   return (
     <div className={styles.container}>
       <div className={styles.songContainer}>
@@ -15,8 +14,8 @@ function SongItem({ title, artist, overlap }: Props) {
         <p className={styles.artist}>{artist}</p>
       </div>
       <div className={styles.overlapContainer}>
-        <p className={styles.peopleAmountParagraph}>{overlap}</p>
-        <p className={styles.peopleParagraph}>人</p>
+        <p className={styles.peopleAmount}>{overlap}</p>
+        <p className={styles.peopleLabel}>人</p>
       </div>
     </div>
   );

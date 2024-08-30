@@ -8,7 +8,11 @@ type Props = {
 function AvatarItem({ name, avatar }: Props) {
   return (
     <div className={styles.container}>
-      <img src={avatar} alt={name} />
+      {name === "" ? (
+        <img className={styles.avatarNoneImg} src={avatar} alt={name} />
+      ) : (
+        <img className={styles.avatarImg} src={avatar} alt={name} />
+      )}
       <p>{name}</p>
     </div>
   );
