@@ -12,11 +12,6 @@ export type SongData = {
   overlap: number;
 };
 
-type SongData = {
-  song: string;
-  artist: string;
-};
-
 export type SpotifyData = {
   [playlistName: string]: SongData[];
 };
@@ -53,11 +48,11 @@ export type RoomGetPostRequest = {
 };
 
 export type RoomGetPostResponse = {
-  display_names: display_names[];
-  song_data: song_data[];
+  display_names: DisplayName[];
+  song_data: SongData[];
 };
 
-type DisplayNames = {
+type DisplayName = {
   display_name: string;
   user_id: string;
 };
