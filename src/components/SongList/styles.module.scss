@@ -1,12 +1,13 @@
 .container {
   display: flex;
-  width: 80%;
-  height: 600px;
+  padding: 12px;
+  width: 90%;
+  height: 60vh;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-  background-color: #ff66e8;
-  opacity: 0.6;
-  border-radius: 12px;
-  overflow-y: scroll;
+  background-color: rgba(255, 102, 232, 0.6);
+  border-radius: 8px;
+  overflow-y: auto;
+  max-height: calc(100vh - 2rem);
 }

@@ -7,13 +7,16 @@ type Props = {
 };
 
 function SongList({ songData }: Props) {
+  const sortedSongData = [...songData].sort((a, b) => b.overlap - a.overlap);
+
   return (
     <div className={styles.container}>
-      {songData.map((song, index) => (
+      {sortedSongData.map((song, index) => (
         <SongItem
           key={index}
           title={song.song_title}
           artist={song.song_artist}
+          overlap={song.overlap}
         />
       ))}
     </div>

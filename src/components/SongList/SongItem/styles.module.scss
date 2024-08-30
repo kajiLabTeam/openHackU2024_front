@@ -1,8 +1,39 @@
 .container {
-    padding-left: 40px;
-    width: 80%;
-    height: 14%;
-    background-color: white;
-    border-radius: 12px;
+  padding: 0px 32px;
+  width: 80%;
+  height: 14%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 12px;
+  align-items: center;
 
+  .songContainer {
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .artist {
+      font-size: 10px;
+      font-weight: bold;
+      color: #747474;
+    }
+  }
+
+  .overlapContainer {
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+
+    .peopleAmountParagraph {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .peopleParagraph {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
 }
