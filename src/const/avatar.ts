@@ -1,1 +1,1 @@
-export const NUMBER_OF_AVATARS = 20;
+export const NUMBER_OF_AVATARS = 60;
